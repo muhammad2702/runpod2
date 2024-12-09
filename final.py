@@ -30,18 +30,6 @@ import runpod
 START_DATE = None
 END_DATE = None
 
-def handler(job):
-    global START_DATE, END_DATE
-    # Access the input data from the job
-    job_input = job.get("input", {})
-    
-    # Retrieve the 'START_DATE' and 'END_DATE' values
-    START_DATE = job_input.get("START_DATE", "")
-    END_DATE = job_input.get("END_DATE", "")
-    
-    # Implement your processing logic using 'start_date' and 'end_date'
-
-    collect(START_DATE,END_DATE)
 	
     
  
@@ -980,9 +968,24 @@ def preprocess_and_predict():
     preprocessed_data.to_csv('predictions/latest_predictions.csv', index=False)
     print("Predictions saved to 'predictions/latest_predictions.csv'.")
     return { "status": "success", "predictions": predictions }
-   
-if __name__ == "__main__":
+
+
+def handler(job):
+    global START_DATE, END_DATE
+    # Access the input data from the job
+    job_input = job.get("input", {})
+    
+    # Retrieve the 'START_DATE' and 'END_DATE' values
+    START_DATE = job_input.get("START_DATE", "")
+    END_DATE = job_input.get("END_DATE", "")
+    
+    # Implement your processing logic using 'start_date' and 'end_date'
+
+    collect(START_DATE,END_DATE)
     preprocess()
     main()
     preprocess_and_predict()
+	
+runpod.serverless.start({"handler": handler})
+    
     
