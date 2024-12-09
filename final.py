@@ -65,8 +65,7 @@ TIMEFRAMES = [
 ]
 
 # Date range for data collection
-START_DATE = input_data.get("START_DATE", "2023-05-01")
-END_DATE = input_data.get("END_DATE", datetime.today().strftime('%Y-%m-%d'))
+
 # Directory to save the collected data
 DATA_DIR = 'crypto_data'
 os.makedirs(DATA_DIR, exist_ok=True)
