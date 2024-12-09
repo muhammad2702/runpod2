@@ -963,7 +963,6 @@ def preprocess_and_predict():
 
 
 def handler(job):
-    START_DATE, END_DATE
     # Access the input data from the job
     job_input = job.get("input", {})
     
