@@ -25,9 +25,26 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import balanced_accuracy_score  # If you want to use balanced accuracy
 from torch.nn.init import xavier_uniform_
 from datetime import datetime, timedelta
+import runpod
 
+START_DATE = None
+END_DATE = None
 
-
+def handler(job):
+    global START_DATE, END_DATE
+    # Access the input data from the job
+    job_input = job.get("input", {})
+    
+    # Retrieve the 'START_DATE' and 'END_DATE' values
+    START_DATE = job_input.get("START_DATE", "")
+    END_DATE = job_input.get("END_DATE", "")
+    
+    # Implement your processing logic using 'start_date' and 'end_date'
+    print(f"Processing data from {start_date} to {end_date}")
+    collect(START_DATE,END_DATE)
+	
+    
+ 
 
 # Configuration
 API_KEY = 'de_kgSuhw6v4KnRK0wprJCoBAIhqSd5R'  # Replace with your actual API key
@@ -94,7 +111,7 @@ def fetch_data(ticker, multiplier, timespan, from_date, to_date):
         print(f"Error fetching data for {ticker} - {timespan}: {response.status_code} - {response.text}")
         return []
 
-def collect():
+def collect(START_DATE,END_DATE):
     start = datetime.strptime(START_DATE, '%Y-%m-%d')
     end = datetime.strptime(END_DATE, '%Y-%m-%d')
 
@@ -965,7 +982,6 @@ def preprocess_and_predict():
     return { "status": "success", "predictions": predictions }
    
 if __name__ == "__main__":
-    collect()
     preprocess()
     main()
     preprocess_and_predict()
