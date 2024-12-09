@@ -27,13 +27,6 @@ from torch.nn.init import xavier_uniform_
 from datetime import datetime, timedelta
 import runpod
 
-START_DATE = None
-END_DATE = None
-
-	
-    
- 
-
 # Configuration
 API_KEY = 'de_kgSuhw6v4KnRK0wprJCoBAIhqSd5R'  # Replace with your actual API key
 BASE_URL = 'https://api.polygon.io/v2/aggs/ticker/{ticker}/range/{multiplier}/{timespan}/{from_date}/{to_date}'
@@ -970,13 +963,16 @@ def preprocess_and_predict():
 
 
 def handler(job):
-    global START_DATE, END_DATE
+    START_DATE, END_DATE
     # Access the input data from the job
     job_input = job.get("input", {})
     
     # Retrieve the 'START_DATE' and 'END_DATE' values
     START_DATE = job_input.get("START_DATE", "")
+    print(f"START_DATE :  {START_DATE}")
     END_DATE = job_input.get("END_DATE", "")
+    print(f"END_DATE :  {END_DATE}")
+
     
     # Implement your processing logic using 'start_date' and 'end_date'
 
