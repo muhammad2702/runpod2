@@ -964,7 +964,14 @@ def preprocess_and_predict():
     preprocessed_data['leg_direction_prediction'] = predictions["leg_direction"]
     preprocessed_data.to_csv('predictions/latest_predictions.csv', index=False)
     print("Predictions saved to 'predictions/latest_predictions.csv'.")
-
+    return {
+            "status": "success",
+            "predictions": predictions}
+    except Exception as e:
+    	return {
+            "status": "error",
+            "message": str(e)
+        }
 
 if __name__ == "__main__":
     collect()
