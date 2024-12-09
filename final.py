@@ -40,7 +40,7 @@ def handler(job):
     END_DATE = job_input.get("END_DATE", "")
     
     # Implement your processing logic using 'start_date' and 'end_date'
-    print(f"Processing data from {start_date} to {end_date}")
+
     collect(START_DATE,END_DATE)
 	
     
